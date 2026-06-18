@@ -9,8 +9,6 @@ export default function Footer() {
         </p>
         <div className="flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
           <span>Weather data via WeatherAI API</span>
-          <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700 inline-block" />
-          <span>AI powered by Gemini</span>
         </div>
       </div>
     </footer>

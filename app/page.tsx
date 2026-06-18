@@ -161,135 +161,146 @@ export default function Home() {
   const aiPercentage = usageData ? (usageData.aiUsed / usageData.aiLimit) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        {/* Header */}
-        <header className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 mb-6 shadow-sm">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-            <div className="flex items-center gap-4">
-              <div className="bg-emerald-600 p-2.5 rounded-lg">
-                <Sprout className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-                  {t[language].title}
-                </h1>
-                <p className="text-gray-500 dark:text-gray-400 text-xs mt-0.5">
-                  {t[language].subtitle}
-                </p>
-              </div>
+    <div className="flex flex-col min-h-[calc(100vh-80px)] bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 rounded-xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800">
+      {/* Top Navbar */}
+      <nav className="w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 flex-shrink-0 z-10 transition-all">
+        <div className="px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3 w-full md:w-auto">
+            <div className="bg-emerald-600 p-2.5 rounded-lg shrink-0 shadow-lg shadow-emerald-500/30">
+              <Sprout className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">
+                {t[language].title.replace('Farming Assistant', '').trim() || 'Weather AI'}
+              </h1>
+              <p className="text-gray-500 dark:text-gray-400 text-[10px] mt-0.5 leading-tight font-medium uppercase tracking-widest hidden sm:block">
+                Farming Assistant
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between w-full md:w-auto gap-4">
+            {/* Navigation Buttons */}
+            <div className="flex flex-1 md:flex-none bg-gray-100 dark:bg-gray-800/50 p-1.5 rounded-xl border border-gray-200 dark:border-gray-800 gap-1">
+              <button
+                onClick={() => setActiveTab('weather')}
+                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                  activeTab === 'weather'
+                    ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 shadow-sm border border-emerald-200 dark:border-emerald-800/30'
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 border border-transparent hover:shadow-sm'
+                }`}
+              >
+                <CloudSun className={`w-4 h-4 shrink-0 ${activeTab === 'weather' ? 'text-emerald-600 dark:text-emerald-400' : ''}`} />
+                <span className="hidden sm:inline">{t[language].weatherTab}</span>
+                <span className="sm:hidden">Weather</span>
+              </button>
+              <button
+                onClick={() => setActiveTab('agroforestry')}
+                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                  activeTab === 'agroforestry'
+                    ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 shadow-sm border border-emerald-200 dark:border-emerald-800/30'
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 border border-transparent hover:shadow-sm'
+                }`}
+              >
+                <Trees className={`w-4 h-4 shrink-0 ${activeTab === 'agroforestry' ? 'text-emerald-600 dark:text-emerald-400' : ''}`} />
+                <span className="hidden sm:inline">{t[language].agroforestryTab}</span>
+                <span className="sm:hidden">Trees</span>
+              </button>
             </div>
 
-            <div className="flex items-center gap-2">
+            {/* Language Selection */}
+            <div className="flex gap-1 bg-gray-100 dark:bg-gray-800/50 p-1.5 rounded-xl border border-gray-200 dark:border-gray-800 shrink-0">
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${language === 'en'
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-250 dark:hover:bg-gray-700'
-                  }`}
+                className={`px-3 py-2 rounded-lg text-xs font-bold transition-all duration-300 ${
+                  language === 'en'
+                    ? 'bg-white dark:bg-gray-700 text-emerald-700 dark:text-emerald-400 shadow-sm border border-gray-200 dark:border-gray-600'
+                    : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
               >
-                English
+                EN
               </button>
               <button
                 onClick={() => setLanguage('sw')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${language === 'sw'
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-250 dark:hover:bg-gray-700'
-                  }`}
+                className={`px-3 py-2 rounded-lg text-xs font-bold transition-all duration-300 ${
+                  language === 'sw'
+                    ? 'bg-white dark:bg-gray-700 text-emerald-700 dark:text-emerald-400 shadow-sm border border-gray-200 dark:border-gray-600'
+                    : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
               >
-                Kiswahili
+                SW
               </button>
             </div>
           </div>
-        </header>
-
-        {/* API Usage Cards */}
-        {usageData && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm">
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-xs font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2 uppercase tracking-wider">
-                  <Activity className="w-4 h-4 text-emerald-600" />
-                  {t[language].apiUsage}
-                </span>
-                <span className="text-[10px] text-gray-400">{t[language].resets}: {new Date(usageData.resetDate).toLocaleDateString()}</span>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-500">{t[language].weatherApiCalls}</span>
-                    <span className="font-semibold">{usageData.requestsUsed}/{usageData.requestsLimit}</span>
-                  </div>
-                  <div className="w-full bg-gray-150 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-500 ${usagePercentage > 90 ? 'bg-red-500' :
-                          usagePercentage > 70 ? 'bg-yellow-500' :
-                            'bg-emerald-500'
-                        }`}
-                      style={{ width: `${Math.min(usagePercentage, 100)}%` }}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-500">{t[language].aiSummaries}</span>
-                    <span className="font-semibold">{usageData.aiUsed}/{usageData.aiLimit}</span>
-                  </div>
-                  <div className="w-full bg-gray-150 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-500 ${aiPercentage > 90 ? 'bg-red-500' :
-                          aiPercentage > 70 ? 'bg-yellow-500' :
-                            'bg-emerald-500'
-                        }`}
-                      style={{ width: `${Math.min(aiPercentage, 100)}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
-              <div>
-                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">{t[language].weatherStatus}</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                  {weatherData?.current.temp ? `${Math.round(weatherData.current.temp)}°C` : '--'}
-                </p>
-              </div>
-              <div className="bg-emerald-50 dark:bg-emerald-950/40 p-2.5 rounded-lg border border-emerald-100 dark:border-emerald-900/30">
-                <CloudSun className="w-6 h-6 text-emerald-600" />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Tab Selection */}
-        <div className="flex gap-2 mb-6 bg-gray-100 dark:bg-gray-900 p-1 rounded-xl max-w-md border border-gray-200 dark:border-gray-800">
-          <button
-            onClick={() => setActiveTab('weather')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-xs font-semibold transition-all ${
-              activeTab === 'weather'
-                ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm border border-gray-200 dark:border-gray-700'
-                : 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'
-            }`}
-          >
-            <CloudSun className="w-4 h-4" />
-            {t[language].weatherTab}
-          </button>
-          <button
-            onClick={() => setActiveTab('agroforestry')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-xs font-semibold transition-all ${
-              activeTab === 'agroforestry'
-                ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm border border-gray-200 dark:border-gray-700'
-                : 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'
-            }`}
-          >
-            <Trees className="w-4 h-4" />
-            {t[language].agroforestryTab}
-          </button>
         </div>
+      </nav>
 
-        {activeTab === 'weather' ? (
-          <>
+      {/* Main Content Area */}
+      <main className="flex-1 relative">
+        <div className="absolute inset-0 overflow-y-auto">
+          <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+            {/* API Usage Cards (moved up) */}
+            {usageData && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-xs font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2 uppercase tracking-wider">
+                      <Activity className="w-4 h-4 text-emerald-600" />
+                      {t[language].apiUsage}
+                    </span>
+                    <span className="text-[10px] text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md">{t[language].resets}: {new Date(usageData.resetDate).toLocaleDateString()}</span>
+                  </div>
+                  <div className="space-y-4 mt-4">
+                    <div>
+                      <div className="flex justify-between text-xs mb-1.5">
+                        <span className="text-gray-500 font-medium">{t[language].weatherApiCalls}</span>
+                        <span className="font-bold text-gray-700 dark:text-gray-200">{usageData.requestsUsed} / {usageData.requestsLimit}</span>
+                      </div>
+                      <div className="w-full bg-gray-150 dark:bg-gray-800 rounded-full h-1.5 overflow-hidden border border-gray-100 dark:border-gray-700">
+                        <div
+                          className={`h-full rounded-full transition-all duration-700 ${usagePercentage > 90 ? 'bg-red-500' :
+                              usagePercentage > 70 ? 'bg-yellow-500' :
+                                'bg-emerald-500'
+                            }`}
+                          style={{ width: `${Math.min(usagePercentage, 100)}%` }}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-xs mb-1.5">
+                        <span className="text-gray-500 font-medium">{t[language].aiSummaries}</span>
+                        <span className="font-bold text-gray-700 dark:text-gray-200">{usageData.aiUsed} / {usageData.aiLimit}</span>
+                      </div>
+                      <div className="w-full bg-gray-150 dark:bg-gray-800 rounded-full h-1.5 overflow-hidden border border-gray-100 dark:border-gray-700">
+                        <div
+                          className={`h-full rounded-full transition-all duration-700 ${aiPercentage > 90 ? 'bg-red-500' :
+                              aiPercentage > 70 ? 'bg-yellow-500' :
+                                'bg-emerald-500'
+                            }`}
+                          style={{ width: `${Math.min(aiPercentage, 100)}%` }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">{t[language].weatherStatus}</p>
+                    <p className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                      {weatherData?.current.temp ? `${Math.round(weatherData.current.temp)}°C` : '--'}
+                    </p>
+                    <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-1 font-semibold">{weatherData?.current.condition || 'Loading...'}</p>
+                  </div>
+                  <div className="bg-emerald-50 dark:bg-emerald-950/40 p-4 rounded-full border border-emerald-100 dark:border-emerald-900/30 shadow-inner">
+                    <CloudSun className="w-10 h-10 text-emerald-600" />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'weather' ? (
+              <>
             {/* Controls */}
             <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 mb-6 shadow-sm flex flex-col sm:flex-row gap-4 items-center">
               <div className="flex-1 w-full">
@@ -332,7 +343,9 @@ export default function Home() {
         ) : (
           <AgroforestryAnalysis language={language} />
         )}
-      </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
