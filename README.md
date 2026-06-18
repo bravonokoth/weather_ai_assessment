@@ -59,14 +59,14 @@ npm -v
 
 HTTPS:
 ```bash
-git clone https://github.com/JAPHETHNYARANGA/Weather-AI-Integration-Assessment.git
-cd Weather-AI-Integration-Assessment
+git clone https://github.com/brvonokoth/weather_ai_assessment.git
+cd weather_ai_assessment
 ```
 
 SSH:
 ```bash
-git clone git@github.com:JAPHETHNYARANGA/Weather-AI-Integration-Assessment.git
-cd Weather-AI-Integration-Assessment
+git clone git@github.com:brvonokoth/weather_ai_assessment.git
+cd weather_ai_assessment
 ```
 
 ### 2. Install Dependencies
@@ -203,6 +203,14 @@ npm run test:coverage
 The coverage report will show file-by-file statements, branches, functions, and line coverage directly in the terminal, and output a detailed HTML report to `coverage/index.html`.
 
 ## Screenshots
-  
+
+![Weather Dashboard](./public/Screenshot%20from%202026-06-18%2009-19-15.png)
+
+![7-Day Forecast](./public/Screenshot%20from%202026-06-18%2009-19-42.png)
+
+![AI Farming Advice](./public/Screenshot%20from%202026-06-18%2009-19-53.png)
+
+![Agroforestry Analysis](./public/Screenshot%20from%202026-06-18%2009-20-20.png)
+
 ## License
 This project was created as part of the Weather AI Integration Assessment.

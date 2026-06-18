@@ -154,7 +154,7 @@ export async function GET(request: Request) {
       if (geoRes.ok) {
         const geoData = await geoRes.json();
         const address = geoData.address || {};
-        county = address.county || address.city || address.town || address.suburb || address.village || 'Kenya';
+        county = address.city || address.town || address.county || address.state_district || address.state || address.village || 'Kenya';
       }
     } catch (e) {
       console.error('Reverse geocode failed:', e);
