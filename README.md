@@ -59,13 +59,13 @@ npm -v
 
 HTTPS:
 ```bash
-git clone https://github.com/brvonokoth/weather_ai_assessment.git
+git clone https://github.com/bravonokoth/weather_ai_assessment.git
 cd weather_ai_assessment
 ```
 
 SSH:
 ```bash
-git clone git@github.com:brvonokoth/weather_ai_assessment.git
+git clone git@github.com:bravonokoth/weather_ai_assessment.git
 cd weather_ai_assessment
 ```
 
